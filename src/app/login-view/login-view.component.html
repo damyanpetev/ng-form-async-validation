@@ -1,45 +1,46 @@
-<form *ngIf="showLogin" class="input-group-form" [formGroup]="loginForm" (ngSubmit)="tryLogin()">
-  <h3>Welcome Back</h3>
+<form class="input-group-form" [formGroup]="user" (ngSubmit)="tryRegister()">
+  <h4>Create your account</h4>
   <igx-input-group>
-    <igx-prefix>
-      <igx-icon>account_circle</igx-icon>
-    </igx-prefix>
-    <label igxLabel for="email">Username</label>
-    <input igxInput id="email" name="email" formControlName="email" type="text" />
+    <label igxLabel for="fullName">Full Name</label>
+    <input igxInput name="fullName" type="text" formControlName="fullName" />
+    <igx-suffix>
+      <igx-icon>person</igx-icon>
+    </igx-suffix>
+    <igx-hint *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
+      <div *ngIf="fullName.errors.required">
+        Name is required.
+      </div>
+    </igx-hint>
   </igx-input-group>
   <igx-input-group>
-    <igx-prefix>
-      <igx-icon>lock</igx-icon>
-    </igx-prefix>
+    <label igxLabel for="email">Email address</label>
+    <input igxInput name="email" type="email" formControlName="email" />
+    <igx-suffix>
+      <igx-icon>email</igx-icon>
+    </igx-suffix>
+    <igx-hint *ngIf="email.invalid && (email.dirty || email.touched)">
+      <div *ngIf="email.errors.required">
+        Email is required.
+      </div>
+      <div *ngIf="email.errors.emailExists">
+        User with this email is already registered.
+      </div>
+    </igx-hint>
+  </igx-input-group>
+  <igx-input-group>
     <label igxLabel for="password">Password</label>
-    <input igxInput id="password" name="password" type="password" formControlName="password" />
+    <input igxInput name="password" type="password" formControlName="password" />
+    <igx-suffix>
+      <igx-icon>lock</igx-icon>
+    </igx-suffix>
+    <igx-hint *ngIf="password.invalid && (password.dirty || password.touched)">
+      <div *ngIf="password.errors.minlength">
+        Password must be at least 8 characters long.
+      </div>
+      <div *ngIf="password.errors.required">
+        Password is required.
+      </div>
+    </igx-hint>
   </igx-input-group>
-  <button igxButton="raised" type="submit" igxRipple [disabled]="!loginForm.valid">LOG IN</button>
-  <a (click)="showRegistrationForm()">Register</a>
+  <button igxButton="raised" type="submit" igxRipple [disabled]="!user.valid">SIGN UP</button>
 </form>
-
-<div *ngIf="showSuccessLogin">You've successfully logged in</div>
-
-<form *ngIf="showRegister" class="input-group-form" [formGroup]="registrationForm" (ngSubmit)="tryRegister()">
-  <h3>Create your account</h3>
-  <igx-input-group>
-    <label igxLabel for="firstName">First Name</label>
-    <input igxInput id="firstName" name="firstName" formControlName="firstName" type="text" />
-  </igx-input-group>
-  <igx-input-group>
-    <label igxLabel for="lastName">Last Name</label>
-    <input igxInput id="lastName" name="lastName" formControlName="lastName" type="text" />
-  </igx-input-group>
-  <igx-input-group>
-    <label igxLabel for="newEmail">Username</label>
-    <input igxInput id="newEmail" name="newEmail" formControlName="newEmail" type="text" />
-  </igx-input-group>
-  <igx-input-group>
-    <input igxInput id="newPassword" name="newPassword" type="password" formControlName="newPassword" />
-    <label igxLabel for="newPassword">Password</label>
-  </igx-input-group>
-  <button igxButton="raised" type="submit" igxRipple [disabled]="!registrationForm.valid">SIGN UP</button>
-  <a (click)="showLoginForm()">Log in</a>
-</form>
-
-<div *ngIf="showSuccessRegister">You have successfully registered.</div>

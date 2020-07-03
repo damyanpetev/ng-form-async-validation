@@ -1,54 +1,27 @@
-import {Component} from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login-view',
   templateUrl: './login-view.component.html',
   styleUrls: ['./login-view.component.scss']
 })
+export class LoginViewComponent {
+  public user: FormGroup;
 
-  export class LoginViewComponent {
-  public loginForm: FormGroup;
-  public registrationForm: FormGroup;
-  public showLogin = true;
-  public showRegister = false;
-  public showSuccessLogin = false;
-  public showSuccessRegister = false;
+  public get fullName(): AbstractControl { return this.user.get('fullName'); }
+  public get email(): AbstractControl { return this.user.get('email'); }
+  public get password(): AbstractControl { return this.user.get('password'); }
 
   constructor(fb: FormBuilder) {
-    this.loginForm = fb.group( {
+    this.user = fb.group( {
         email: ['', Validators.required],
-        password: ['', Validators.required]
-      });
-
-    this.registrationForm = fb.group( {
-        newEmail: ['', Validators.required],
-        newPassword: ['', Validators.required],
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required]
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        fullName: ['', Validators.required]
     });
   }
 
-  tryLogin() {
-    const loginInfo = this.loginForm.value;
-    // use loginInfo
-    this.showLogin = false;
-    this.showSuccessLogin = true;
-  }
-
-  showRegistrationForm() {
-    this.showLogin = false;
-    this.showRegister = true;
-  }
-  showLoginForm() {
-    this.showLogin = true;
-    this.showRegister = false;
-  }
-
-  tryRegister() {
-    const registerInfo = this.registrationForm.value;
-    // use registerInfo
-    this.showRegister = false;
-    this.showSuccessRegister = true;
+  public tryRegister(): void {
+    console.log('register');
   }
 }

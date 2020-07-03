@@ -1,6 +1,10 @@
 {
   "name": "form-async-validation",
   "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "url": ""
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
