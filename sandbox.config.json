@@ -1,0 +1,5 @@
+{
+  "view": "browser",
+  "template": "angular-cli",
+  "hardReloadOnChange": false
+}
