@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { LoginViewComponent } from './login-view/login-view.component';
-import { IgxInputGroupModule, IgxIconModule, IgxButtonModule, IgxRippleModule } from 'igniteui-angular';
+import { IgxInputGroupModule, IgxIconModule, IgxButtonModule, IgxRippleModule, IgxProgressBarModule } from 'igniteui-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     IgxIconModule,
     IgxButtonModule,
     IgxRippleModule,
+    IgxProgressBarModule,
     ReactiveFormsModule
   ],
   providers: [],

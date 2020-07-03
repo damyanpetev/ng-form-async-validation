@@ -14,13 +14,17 @@
   </igx-input-group>
   <igx-input-group>
     <label igxLabel for="email">Email address</label>
-    <input igxInput name="email" type="email" formControlName="email" />
+    <input igxInput name="email" type="email" formControlName="email" placeholder="try not@taken, duh" autocomplete="off"/>
     <igx-suffix>
+      <igx-circular-bar *ngIf="userExistsValidator.checking" [indeterminate]="true" class="request-indicator"></igx-circular-bar>
       <igx-icon>email</igx-icon>
     </igx-suffix>
     <igx-hint *ngIf="email.invalid && (email.dirty || email.touched)">
       <div *ngIf="email.errors.required">
         Email is required.
+      </div>
+      <div *ngIf="email.errors.email">
+        Email.. should be an email.
       </div>
       <div *ngIf="email.errors.emailExists">
         User with this email is already registered.
